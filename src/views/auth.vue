@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const SERVER_DOMAIN = "http://test.p-10.ru/"; 
+const SERVER_DOMAIN = "http://test.p-10.ru"; 
 
 const username = ref('');
 const password = ref('');
