@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const SERVER_DOMAIN = "http://test.p-10.ru"; 
+const SERVER_DOMAIN = "https://test.p-10.ru"; 
 
 const username = ref('');
 const password = ref('');
@@ -28,13 +28,13 @@ const handleLogin = async () => {
   try {
     errorMessage.value = '';
 
-    await fetch(`${SERVER_DOMAIN}/api/auth/csrf/`, {
+    await fetch(`${SERVER_DOMAIN}/api/auth/csrf`, {
       credentials: "include",
     });
 
     const csrfToken = getCookie("csrftoken");
 
-    const response = await fetch(`${SERVER_DOMAIN}/api/auth/login/`, {
+    const response = await fetch(`${SERVER_DOMAIN}/api/auth/login`, {
         method: "POST",
         credentials: "include",
         headers: {
