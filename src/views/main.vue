@@ -12,22 +12,27 @@ const profile = reactive({
         <h2>Добро пожаловать, {{ profile.name }} {{ profile.surname }}</h2>
 
         <button>
-
+            Открыть смену
         </button>
 
         <button>
-
+            Статус площадок
         </button>
 
         <button>
-
+            Пропуски
         </button>
-        
-        <button>
 
+        <button>
+            Админка
         </button>
     </div>
 </template>
 
 <style scoped>
+.profile_container { 
+    max-width: 300px; 
+    margin: 40px auto; 
+    font-family: sans-serif; 
+}
 </style>
