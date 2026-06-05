@@ -20,9 +20,8 @@ const places = reactive({
     <div class="container">
         <h2>Статус площадок</h2>
 
-        <div v-for="place in places" class="places">
-            <div v-if="place === true" class="open_places">{{ place }}</div>
-            <div v-if="place === true">{{ place }}</div>
+        <div v-for="(isOpen, name) in places" class="places">
+            <div :class="{ open_places: isOpen }">{{ name }}</div>
         </div>
     </div>
 </template>
