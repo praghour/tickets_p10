@@ -81,25 +81,5 @@ const handleLogin = async () => {
 </template>
 
 <style scoped>
-.container { 
-    max-width: 300px; 
-    margin: 40px auto; 
-    font-family: sans-serif; 
-}
 
-input { 
-    display: block; 
-    width: 100%; 
-    margin-bottom: 12px; 
-    padding: 6px; 
-}
-
-button { 
-    width: 100%; 
-    padding: 8px; 
-    background: #6f496c; 
-    color: white; 
-    border: none; 
-    cursor: pointer; 
-}
 </style>
