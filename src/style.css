@@ -295,6 +295,12 @@ code {
   }
 }
 
+.container { 
+    max-width: 300px; 
+    margin: 40px auto; 
+    font-family: sans-serif; 
+}
+
 button { 
     width: 100%; 
     padding: 8px; 
@@ -302,6 +308,10 @@ button {
     color: white; 
     border: none; 
     cursor: pointer; 
+}
+
+button:hover {
+  background: #61415e;
 }
 
 input { 

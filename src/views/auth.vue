@@ -62,7 +62,7 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="login_container">
+  <div class="container">
     <h2>Авторизация</h2>
     
     <form @submit.prevent="handleLogin">
@@ -81,7 +81,7 @@ const handleLogin = async () => {
 </template>
 
 <style scoped>
-.login_container { 
+.container { 
     max-width: 300px; 
     margin: 40px auto; 
     font-family: sans-serif; 

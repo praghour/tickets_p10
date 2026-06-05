@@ -10,6 +10,7 @@ import { RouterView, RouterLink } from 'vue-router';
             <nav class="nav">
                 <RouterLink :to="{ name: 'auth' }">Авторизация</RouterLink>
                 <RouterLink :to="{ name: 'main' }">Главная страница (профиль)</RouterLink>
+                <RouterLink :to="{ name: 'status' }">Статус площадок</RouterLink>
                 <RouterLink :to="{ name: 'notFound' }">Страница 404</RouterLink>
             </nav>
         </div>
