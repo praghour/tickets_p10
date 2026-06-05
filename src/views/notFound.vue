@@ -1,4 +1,6 @@
 <script setup>
+import { useRouter } from 'vue-router';
+
 function openProfile() {
     router.push({name: 'main'});
 };
