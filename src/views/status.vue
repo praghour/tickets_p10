@@ -3,14 +3,14 @@ import { reactive } from 'vue';
 
 const places = reactive({
     'Ресепшн' : true,
-    'Navicula Artis' : true,
+    'Navicula Artis' : false,
     'Самиздат' : false,
     'Музей Звука' : false,
-    'Арт-Лига' : false,
+    'Арт-Лига' : true,
     'Музей Рока' : false,
     'Малый зал МНИ' : false,
     'Музей Битлз' : false,
-    'Большой зал МНИ' : false,
+    'Большой зал МНИ' : true,
     'Мост через Стикс' : false,
     'Арт-Буфет' : false
 });
