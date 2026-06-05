@@ -14,14 +14,27 @@ const places = reactive({
     'Мост через Стикс' : false,
     'Арт-Буфет' : false
 });
+
+const openPlaces = [];
+const closedPlaces = [];
+
+for (let name in places) {
+    if (places[name] === true) {
+        openPlaces.push(name);
+    } else {
+        closedPlaces.push(name);
+    };
+};
+
+const allPlaces = [...openPlaces, ...closedPlaces];
 </script>
 
 <template>
     <div class="container">
         <h2>Статус площадок</h2>
 
-        <div v-for="(isOpen, name) in places" class="places">
-            <div :class="{ open_places: isOpen }">{{ name }}</div>
+        <div v-for="name in allPlaces" class="places">
+            <div :class="{ open_places: places[name] === true }">{{ name }}</div>
         </div>
     </div>
 </template>
