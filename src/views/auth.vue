@@ -1,21 +1,21 @@
 <script setup>
 import { ref } from 'vue';
 
-const SERVER_DOMAIN = "http://no-tickets.p-10.ru"; 
-
 const username = ref('');
 const password = ref('');
 const errorMessage = ref('');
 
-// получение куки
 function getCookie(name) {
     let cookieValue = null;
+
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
         for (let cookie of cookies) {
             cookie = cookie.trim();
             if (cookie.startsWith(name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                cookieValue = decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                );
                 break;
             };
         };
@@ -23,18 +23,17 @@ function getCookie(name) {
     return cookieValue;
 };
 
-// вход
 const handleLogin = async () => {
   try {
     errorMessage.value = '';
 
-    await fetch(`${SERVER_DOMAIN}/api/auth/csrf/`, {
+    await fetch("https://p-10.ru", {
       credentials: "include",
     });
 
     const csrfToken = getCookie("csrftoken");
 
-    const response = await fetch(`${SERVER_DOMAIN}/api/auth/login/`, {
+    const response = await fetch("https://p-10.ru", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -42,22 +41,21 @@ const handleLogin = async () => {
             "X-CSRFToken": csrfToken,
         },
         body: JSON.stringify({
-            username: username.value, 
-            password: password.value
+            username: username.value,
+            password: password.value, 
         }),
     });
 
     if (response.ok) {
         alert('Вы успешно вошли!');
     } else {
-        const data = await response.json();
-        errorMessage.value = data.detail || 'Неверный логин или пароль';
-    }
+        errorMessage.value = `Сервер вернул статус ${response.status}`;
+    };
 
   } catch (error) {
     console.error("Ошибка сети:", error);
-    errorMessage.value = 'Не удалось связаться с сервером';
-  }
+    errorMessage.value = 'Произошла ошибка при отправке запроса';
+  };
 };
 </script>
 
@@ -81,5 +79,4 @@ const handleLogin = async () => {
 </template>
 
 <style scoped>
-
 </style>
