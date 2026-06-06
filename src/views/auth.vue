@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 
+const API_URL = "https://no-tickets.p-10.ru"; 
+
 const username = ref('');
 const password = ref('');
 const errorMessage = ref('');
@@ -10,8 +12,10 @@ function getCookie(name) {
 
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
+
         for (let cookie of cookies) {
             cookie = cookie.trim();
+
             if (cookie.startsWith(name + '=')) {
                 cookieValue = decodeURIComponent(
                     cookie.substring(name.length + 1)
@@ -23,17 +27,18 @@ function getCookie(name) {
     return cookieValue;
 };
 
+// вход
 const handleLogin = async () => {
   try {
     errorMessage.value = '';
 
-    await fetch("https://p-10.ru", {
+    await fetch(`${API_URL}/api/auth/csrf/`, {
       credentials: "include",
     });
 
     const csrfToken = getCookie("csrftoken");
 
-    const response = await fetch("https://p-10.ru", {
+    const response = await fetch(`${API_URL}/api/auth/login/`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -41,7 +46,7 @@ const handleLogin = async () => {
             "X-CSRFToken": csrfToken,
         },
         body: JSON.stringify({
-            username: username.value,
+            username: username.value, 
             password: password.value, 
         }),
     });
@@ -49,12 +54,12 @@ const handleLogin = async () => {
     if (response.ok) {
         alert('Вы успешно вошли!');
     } else {
-        errorMessage.value = `Сервер вернул статус ${response.status}`;
+        errorMessage.value = `Сервер ответил ошибкой (Статус: ${response.status})`;
     };
 
   } catch (error) {
     console.error("Ошибка сети:", error);
-    errorMessage.value = 'Произошла ошибка при отправке запроса';
+    errorMessage.value = 'Не удалось связаться с сервером';
   };
 };
 </script>
