@@ -70,11 +70,9 @@ const handleLogin = async () => {
     
     <form @submit.prevent="handleLogin">
       <div>
-        <label>Имя пользователя:</label>
         <input v-model="username" type="text" placeholder="Имя пользователя" required/>
       </div>
       <div>
-        <label>Пароль:</label>
         <input v-model="password" type="password" placeholder="Пароль" required/>
       </div>
       <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
