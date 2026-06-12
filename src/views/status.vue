@@ -1,41 +1,42 @@
 <script setup>
-import { reactive } from 'vue';
+import { ref, onMounted } from 'vue';
+import useAuth from '../composables/useAuth';
 
-const places = reactive({
-    'Ресепшн' : true,
-    'Navicula Artis' : false,
-    'Самиздат' : false,
-    'Музей Звука' : false,
-    'Арт-Лига' : true,
-    'Музей Рока' : false,
-    'Малый зал МНИ' : false,
-    'Музей Битлз' : false,
-    'Большой зал МНИ' : true,
-    'Мост через Стикс' : false,
-    'Арт-Буфет' : false
-});
+const { getSites } = useAuth();
 
-const openPlaces = [];
-const closedPlaces = [];
+const places = ref([]);
 
-for (let name in places) {
-    if (places[name] === true) {
-        openPlaces.push(name);
-    } else {
-        closedPlaces.push(name);
-    };
+async function loadSites() {
+    const sites = await getSites();
+
+    places.value = sites.sort((a, b) => {
+        if (a.shift && !b.shift) {
+            return -1;
+        };
+        if (!a.shift && b.shift) {
+            return 1;
+        };
+
+        return 0;
+    });
 };
 
-const allPlaces = [...openPlaces, ...closedPlaces];
+onMounted(() => {
+    loadSites();
+});
 </script>
 
 <template>
     <div class="container">
         <h2>Статус площадок</h2>
 
-        <div v-for="name in allPlaces" class="places">
-            <div :class="{ open_places: places[name] === true }">{{ name }}</div>
+        <div v-for="site in places" :key="site.id" class="places">
+            <div :class="{ open_places: site.shift }">
+                {{ site.name }}
+            </div>
         </div>
+
+        <button @click="loadSites">Обновить</button>
     </div>
 </template>
 
